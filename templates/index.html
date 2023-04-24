@@ -1,0 +1,121 @@
+<!-- BOOTSTRAP -->
+{% extends "bootstrap/base.html" %}
+
+
+<!-- LINKS/SCRIPTS -->
+{% block styles %}
+{{ super() }}
+<!-- CSS -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+<!-- BOOTSTRAP -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<!-- FONT AWESOME -->
+<script src="https://kit.fontawesome.com/76bec3ae94.js" crossorigin="anonymous"></script>
+<!-- FAVICON -->
+<link rel="apple-touch-icon" sizes="180x180" href="/static/images/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon/favicon-16x16.png">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- GOOGLE FONT -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+<!-- PLOTLY JS -->
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+{% endblock %}
+
+
+<!-- WEBPAGE TITLE -->
+{% block title %}
+Crypto Club
+{% endblock %}
+
+
+<!-- NAVIGATION BAR -->
+{% block navbar %}
+<nav class="navbar">
+    <!-- NAVBAR LOGO -->
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                <img src="/static/images/logo.png" width="200" height="150" alt="The Crypto Club">
+            </a>
+        </div>
+    </div>
+    <!-- NAVBAR BUTTONS  -->
+    <div class="container-fluid">
+        <div class="navbar-button-div">
+            <!-- GITHUB BUTTON  -->
+            <a class="btn btn-lg btn-dark" href="https://github.com/okazimi" role="button" target="_blank">
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+    </div>
+</nav>
+{% endblock %}
+
+
+<!-- BODY -->
+{% block content %}
+<!-- CRYPTO TABLE HEADERS -->
+<div class="crypto-data-container">
+<div class="container">
+  <div class="row crypto-data-header">
+    <div class="col-sm col-md col-2 m-auto">
+        <h2>Coin</h2>
+    </div>
+    <div class="col-sm col-md col-2 m-auto">
+      <h2>Price (USD)</h2>
+    </div>
+    <div class="col-sm col-md col-2 m-auto">
+      <h2>Price (EUR)</h2>
+    </div>
+    <div class="col-sm col-md col-2 m-auto">
+      <h2>Price (JPY)</h2>
+    </div>
+    <div class="col-sm col-md col-2 m-auto">
+      <h2>Price (GBP)</h2>
+    </div>
+  </div>
+
+  <hr class="horizontal-line">
+
+  <!-- CRYPTO RATES -->
+  {% for crypto in cryptocurrencies %}
+  <div class="row crypto-data-row">
+      <div class="col-sm col-md col-2">
+          <h2 class="coin-symbol"><img class="coin-logo" src="/static/images/{{crypto}}.png" width="25" height="25" alt="Bitcoin"> {{ crypto }}</h2>
+      </div>
+      <div class="col-sm col-md col-2 m-auto">
+          <h2>{{ cryptorates["{}_USD".format(crypto)] }}</h2>
+      </div>
+      <div class="col-sm col-md col-2 m-auto">
+          <h2>{{ cryptorates["{}_EUR".format(crypto)] }}</h2>
+      </div>
+      <div class="col-sm col-md col-2 m-auto">
+          <h2>{{ cryptorates["{}_JPY".format(crypto)] }}</h2>
+      </div>
+      <div class="col-sm col-md col-2 m-auto">
+          <h2>{{ cryptorates["{}_GBP".format(crypto)] }}</h2>
+      </div>
+  </div>
+  {% endfor %}
+</div>
+</div>
+
+<!-- CRYPTO GRAPH -->
+<div>
+    {{ crypto_graph|safe }}
+</div>
+
+<!-- FLASH MESSAGES -->
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+{% endblock %}

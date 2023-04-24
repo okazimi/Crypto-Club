@@ -1,0 +1,72 @@
+html body {
+    font-family: Ubuntu;
+}
+
+
+
+.navbar-button-div {
+        margin: 10em 2em 0em 0em;
+}
+
+.navbar-button {
+    outline: none;
+    background-color: orange;
+    margin: 0.25em;
+}
+
+
+
+.crypto-data-container {
+    margin: 7.5em 0em 0.5em 0em;
+    text-align: center;
+}
+
+.coin-symbol {
+    text-align: left;
+    margin-left: 2rem;
+}
+
+.crypto-data-row {
+    margin-bottom: 3rem;
+}
+
+
+
+@media (max-width: 767px) {
+  html h2 {
+    font-size: 1rem;
+  }
+  html .coin-logo {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+@media (max-width: 540px) {
+  html h2 {
+    font-size: 1rem;
+  }
+  html .coin-symbol {
+    text-align: left;
+    margin-left: 0rem;
+    width: 4rem;
+  }
+  html .crypto-data-header {
+    text-align: left;
+  }
+}
+
+@media (max-width: 400px) {
+    html .gtitle {
+        font-size: 14px;
+    }
+}
+
+
+
+.horizontal-line{
+    border: 0;
+    height: 3px;
+    background: #095484;
+    background-image: linear-gradient(to right, #ccc, black, #ccc);
+}
